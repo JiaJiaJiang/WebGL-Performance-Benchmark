@@ -174,13 +174,14 @@
 			// check if done waiting yet
 			if( waitFrames == 0 ) 
 			{
-				if( stats.getFps() < lowestFPS  )	// fps too low
+				let fps=stats.getFps();
+				if( fps < lowestFPS  )	// fps too low
 				{
-					addFlag = -1;
+					addFlag = -1*(lowestFPS-fps)*0.5;
 				}
-				else if( stats.getFps() > targetFPS )	// fps too high
+				else if( fps > targetFPS )	// fps too high
 				{
-					addFlag = 1;
+					addFlag = (fps-lowestFPS)*0.5;
 				}
 				else	//dont need to do anything
 				{
@@ -190,13 +191,17 @@
 				//debug
 				//console.log("# Objects: ", removeNum);
 
-				if(addFlag == -1)		//remove objects
+				if(addFlag <0)		//remove objects
 				{
-					scene.remove( meshes[removeNum--] );
+					for(let n=addFlag;n--;){
+						scene.remove( meshes[removeNum--] );
+					}
 				}
-				else if(addFlag == 1)	//add objects
+				else if(addFlag >0)	//add objects
 				{
-					scene.add( meshes[removeNum++] );
+					for(let n=addFlag;n--;){
+						scene.add( meshes[removeNum++] );
+					}
 				}
 				
 				waitFrames = waitTime;

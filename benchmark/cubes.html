@@ -175,8 +175,7 @@
 			if( waitFrames == 0 ) 
 			{
 				let fps=stats.getFps(),count=removeNum;
-				if(fps>=60)addFlag=1000;
-				else if( fps < lowestFPS  )	// fps too low
+				if( fps < lowestFPS  )	// fps too low
 				{
 					addFlag = -1*(lowestFPS-fps);
 				}

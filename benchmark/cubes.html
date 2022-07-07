@@ -177,11 +177,11 @@
 				let fps=stats.getFps(),count=removeNum;
 				if( fps < lowestFPS  )	// fps too low
 				{
-					addFlag = -1*(lowestFPS-fps);
+					addFlag = -1*Math.ceil((fps/lowestFPS)*10);
 				}
 				else if( fps > targetFPS )	// fps too high
 				{
-					addFlag = (fps-lowestFPS);
+					addFlag = Math.floor((lowestFPS/fps)*500);
 				}
 				else	//dont need to do anything
 				{

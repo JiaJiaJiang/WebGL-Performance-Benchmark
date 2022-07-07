@@ -174,8 +174,9 @@
 			// check if done waiting yet
 			if( waitFrames == 0 ) 
 			{
-				let fps=stats.getFps();
-				if( fps < lowestFPS  )	// fps too low
+				let fps=stats.getFps(),count=removeNum;
+				if(fps>=60)addFlag=1000;
+				else if( fps < lowestFPS  )	// fps too low
 				{
 					addFlag = -1*(lowestFPS-fps);
 				}
@@ -193,6 +194,7 @@
 
 				if(addFlag <0)		//remove objects
 				{
+					addFlag=Math.max(addFlag,-count);
 					for(let n=addFlag;n++;){
 						scene.remove( meshes[removeNum--] );
 					}
